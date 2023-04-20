@@ -1,0 +1,260 @@
+Which algorithm can ensure data integrity?
+RSA
+AES
+MD5
+PKI
+.
+single
+3
+
+Explanation
+!
+What is the keyspace of an encryption algorithm?
+the set of all possible values used to generate a key
+the set of procedures used to calculate asymmetric keys
+the set of hash functions used to generate a key
+the mathematical equation that is used to create a key
+.
+single
+1
+
+Explanation
+!
+Alice and Bob are using a digital signature to sign a document. What key should Alice use to sign the document so that Bob can make sure that the document came from Alice?
+private key from Bob
+private key from Alice
+public key from Bob
+username and password from Alice
+.
+single
+2
+
+Explanation: Alice and Bob are used to explain asymmetric cryptography used in digital signatures. Alice uses a private key to encrypt the message digest. The message, encrypted message digest, and the public key are used to create the signed document and prepare it for transmission.
+!
+Which three security services are provided by digital signatures? (Choose three.)
+provides nonrepudiation using HMAC functions
+guarantees data has not changed in transit
+provides data encryption
+authenticates the source
+provides confidentiality of digitally signed data
+authenticates the destination
+.
+multiple
+2, 3, 4
+
+Explanation: Digital signatures are a mathematical technique used to provide three basic security services. Digital signatures have specific properties that enable entity authentication and data integrity. In addition, digital signatures provide nonrepudiation of the transaction. In other words, the digital signature serves as legal proof that the data exchange did take place.
+!
+What is another name for confidentiality of information?
+consistency
+trustworthiness
+accuracy
+privacy
+.
+single
+4
+
+Explanation: Privacy is another name for confidentiality. Accuracy, consistency, and trustworthiness describe integrity of data.
+!
+As data is being stored on a local hard disk, which method would secure the data from unauthorized access?
+a duplicate hard drive copy
+deletion of sensitive files
+two factor authentication
+data encryption
+.
+single
+4
+
+Explanation: Data encryption is the process of converting data into a form where only a trusted, authorized person with a secret key or password can decrypt the data and access the original form.
+!
+What popular encryption algorithm requires that both the sender and receiver know a pre-shared key?
+PKI
+MD5
+AES
+HMAC
+.
+single
+3
+
+Explanation: MD5 is a hashing algorithm that guarantees that no one intercepted the message and altered it. Advanced Encryption Standard (AES) is a popular symmetric encryption algorithm where each communicating party needs to know the pre-shared key. Public key infrastructure (PKI) is an asymmetric encryption algorithm based on the assumption that the two communicating parties have not previously shared a secret key. HMAC is a hash message authentication code that guarantees that the message is not a forgery and actually comes from the authentic source.
+!
+In which method used in cryptanalysis does the attacker know a portion of the plaintext and the corresponding ciphertext?​
+meet-in-the-middle
+brute-force
+chosen-plaintext
+ciphertext
+.
+single
+1
+
+Explanation
+!
+What technology supports asymmetric key encryption used in IPsec VPNs?
+3DES
+IKE
+SEAL
+AES
+.
+single
+2
+
+Explanation: IKE, or Internet Key Exchange, is a protocol to support asymmetric encryption algorithms. It is used to securely exchange encryption keys in the setup of IPsec VPNs.
+!
+What are two symmetric encryption algorithms? (Choose two.)
+3DES
+MD5
+AES
+HMAC
+SHA
+.
+multiple
+1, 3
+
+Explanation: MD5, HMAC, and SHA are hashing algorithms.
+!
+Which two items are used in asymmetric encryption? (Choose two.)
+a token
+a TPM
+a private key
+a DES key
+a public key
+.
+multiple
+3, 5
+
+Explanation: A token is something that is used to provide two-factor authentication. DES is using an identical key to encrypt and decrypt. Asymmetric encryption uses a private key associated with a public key.
+!
+What are two properties of a cryptographic hash function? (Choose two.)
+Complex inputs will produce complex hashes.
+Hash functions can be duplicated for authentication purposes.
+The hash function is one way and irreversible.
+The input for a particular hash algorithm has to have a fixed size.
+The output is a fixed length.
+.
+multiple
+3, 5
+
+Explanation: A cryptographic hash function should have the following properties:The input can be any length.
+!
+Which statement describes asymmetric encryption algorithms?
+They have key lengths ranging from 80 to 256 bits.
+They include DES, 3DES, and AES.
+They are also called shared-secret key algorithms.
+They are relatively slow because they are based on difficult computational algorithms.
+.
+single
+4
+
+Explanation: DES, 3DES, and AES are examples of symmetric encryption algorithms (also known as shared secret key algorithms). The usual key length for symmetric algorithms is 80-256 bits. Asymmetric algorithms are relatively slow because they are based on difficult computational algorithms.
+!
+An IT enterprise is recommending the use of PKI applications to securely exchange information between the employees. In which two cases might an organization use PKI applications to securely exchange information between users? (Choose two.)
+HTTPS web service
+802.1x authentication
+local NTP server
+FTP transfers
+file and directory access permission
+.
+multiple
+1, 2
+
+Explanation: The Public Key Infrastructure (PKI) is a third party-system referred to as a certificate authority or CA. The PKI is the framework used to securely exchange information between parties. Common PKI applications are as follows:
+!
+Two users must authenticate each other using digital certificates and a CA. Which option describes the CA authentication procedure?
+The users must obtain the certificate of the CA and then their own certificate.
+The CA is always required, even after user verification is complete.
+CA certificates are retrieved out-of-band using the PSTN, and the authentication is done in-band over a network.
+After user verification is complete, the CA is no longer required, even if one of the involved certificates expires.
+.
+single
+1
+
+Explanation: When two users must authenticate each other using digital certificates and CA, both users must obtain their own digital certificate from a CA. They submit a certificate request to a CA, and the CA will perform a technical verification by calling the end user (out-of-band). Once the request is approved, the end user retrieves the certificate over the network (in-band) and installs the certificate on the system. After both users have installed their certificate, they can perform authentication by sending their certificate to each other. Each site will use the public key of the CA to verify the validity of the certificate; no CA is involved at this point. If both certificates are verified, both users can now authenticate each other.
+!
+The following message was encrypted using a Caesar cipher with a key of 2: fghgpf vjg ecuvng What is the plaintext message?
+invade the castle
+defend the castle
+defend the region
+invade the region
+.
+single
+2
+
+Explanation: The Caesar cipher was a simple substitution cipher. In this example, if the key is 2, the letter d was moved two spaces to the right, resulting in an encoded message that used the letter f in place of the letter d. The letter g would be the substitute for the letter e, and so on. So, the resulting plaintext is f=d, g=e, h=f, g=e, p=n, f=d, v=t, j=h, g=e, e=c, c=a, u=s, v=t, n=l, g=e.​
+!
+In a hierarchical CA topology, where can a subordinate CA obtain a certificate for itself?
+from the root CA or another subordinate CA at a higher level
+from the root CA or another subordinate CA at the same level
+from the root CA or from self-generation
+from the root CA only
+from the root CA or another subordinate CA anywhere in the tree
+.
+single
+1
+
+Explanation: In a hierarchical CA topology, CAs can issue certificates to end users and to subordinate CAs, which in turn issue their certificates to end users, other lower level CAs, or both. In this way, a tree of CAs and end users is built in which every CA can issue certificates to lower level CAs and end users. Only the root CA can issue a self-signing certificate in a hierarchical CA topology.
+!
+What is the purpose for using digital signatures for code signing?
+to establish an encrypted connection to exchange confidential data with a vendor website
+to verify the integrity of executable files downloaded from a vendor website
+to authenticate the identity of the system with a vendor website
+to generate a virtual ID
+.
+single
+2
+
+Explanation: Code signing is used to verify the integrity of executable files downloaded from a vendor website. Code signing uses digital certificates to authenticate and verify the identity of a website.
+!
+What technology has a function of using trusted third-party protocols to issue credentials that are accepted as an authoritative identity?
+digital signatures
+hashing algorithms
+PKI certificates
+symmetric keys
+.
+single
+3
+
+Explanation: Digital certificates are used to prove the authenticity and integrity of PKI certificates, but a PKI Certificate Authority is a trusted third-party entity that issues PKI certificates. PKI certificates are public information and are used to provide authenticity, confidentiality, integrity, and nonrepudiation services that can scale to large requirements.
+1
+Which requirement of secure communications is ensured by the implementation of MD5 or SHA hash generating algorithms?​
+nonrepudiation
+authentication
+integrity
+confidentiality
+.
+single
+3
+
+Explanation: Integrity is ensured by implementing either MD5 or SHA hash generating algorithms. Many modern networks ensure authentication with protocols, such as HMAC. Data confidentiality is ensured through symmetric encryption algorithms, including DES, 3DES, and AES. Data confidentiality can also be ensured using asymmetric algorithms, including RSA and PKI.​
+!
+What is an example of the one-time pad cipher?
+RC4
+rail fence
+Caesar
+Vigenère
+.
+single
+1
+
+Explanation: RC4 is an example of the one-time pad cipher, and it is widely used on the Internet. The Caesar cipher is a simple substitution cipher, and the Vigenère cipher is based on the Caesar cipher. An example of a transposition cipher is the rail fence cipher.​
+!
+A company is developing a security policy for secure communication. In the exchange of critical messages between a headquarters office and a branch office, a hash value should only be recalculated with a predetermined code, thus ensuring the validity of data source. Which aspect of secure communications is addressed?
+data integrity
+non-repudiation
+data confidentiality
+origin authentication
+.
+single
+4
+
+Explanation: Secure communications consists of four elements: Data confidentiality – guarantees that only authorized users can read the message
+!
+What is the purpose of a digital certificate?
+It guarantees that a website has not been hacked.
+It provides proof that data has a traditional signature attached.
+It ensures that the person who is gaining access to a network device is authorized.
+It authenticates a website and establishes a secure connection to exchange confidential data.
+.
+single
+4
+
+Explanation
+!

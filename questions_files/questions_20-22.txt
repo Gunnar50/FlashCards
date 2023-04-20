@@ -1,0 +1,241 @@
+A network analyst wants to monitor the activity of all new interns. Which type of security testing would track when the interns sign on and sign off the network?
+vulnerability scanning
+password cracking
+network scanning
+integrity checker
+.
+single
+4
+
+Explanation: An integrity checking system can report login and logout activities. Network scanning can detect user names, groups, and shared resources by scanning listening TCP ports. Password cracking is used to test and detect weak passwords. Vulnerability scanning can detect potential weaknesses in a system, such as misconfigurations, default passwords, or DoS attack targets.
+!
+What are three characteristics of SIEM? (Choose three.)
+can be implemented as software or as a service
+Microsoft port scanning tool designed for Windows
+examines logs and events from systems and applications to detect security threats
+consolidates duplicate event data to minimize the volume of gathered data
+uses penetration testing to determine most network vulnerabilities
+provides real-time reporting for short-term security event analysis
+.
+multiple
+1, 3, 4
+
+Explanation: Security Information Event Management (SIEM) is a technology that provides real-time reporting and long-term analysis of security events. SIEM provides the ability to search logs and events from disparate systems or applications to detect threats. SIEM aggregates duplicate events to reduce the volume of event data. SIEM can be implemented as software or as a managed.service. SuperScan is a Microsoft Windows port scanning tool that runs on most versions of Windows.Tools, such as Nmap and SuperScan, can provide effective penetration testing on a network and determine network vulnerabilities while helping to anticipate possible attack mechanisms.
+!
+What testing tool is available for network administrators who need a GUI version of Nmap?
+SuperScan
+SIEM
+Nessus
+Zenmap
+.
+single
+4
+
+Explanation: Nmap and Zenmap are low-level network scanners available to the public. Zenmap is the GUI version of Nmap. SuperScan is a Microsoft port scanning software that detects open TCP and UDP ports on systems. Nessus can scan systems for software vulnerabilities. SIEM is used to provide real-time reporting of security events.
+!
+What is the goal of network penetration testing?
+determining the feasibility and the potential consequences of a successful attack
+detecting potential weaknesses in systems
+detecting configuration changes on network systems
+detecting weak passwords
+.
+single
+1
+
+Explanation: There are many security tests that can be used to assess a network. Penetration testing is used to determine the possible consequences of successful attacks on the network. Vulnerability scanning can detect potential weaknesses in systems. Password cracking can detect weak passwords. Integrity checkers can detect and report configuration changes.
+!
+How does network scanning help assess operations security?
+It can detect open TCP ports on network systems.
+It can detect weak or blank passwords.
+It can simulate attacks from malicious sources.
+It can log abnormal activity.
+.
+single
+1
+
+Explanation: Network scanning can help a network administrator strengthen the security of the network and systems by identifying open TCP and UDP ports that could be targets of an attack.
+!
+What are three characteristics of the ASA routed mode? (Choose three.)
+This mode is referred to as a “bump in the wire.”
+In this mode, the ASA is invisible to an attacker.
+The interfaces of the ASA separate Layer 3 networks and require different IP addresses in different subnets.
+It is the traditional firewall deployment mode.
+This mode does not support VPNs, QoS, or DHCP Relay.
+NAT can be implemented between connected networks.
+.
+multiple
+3, 4, 6
+
+Explanation: Routed mode is the traditional mode for deploying a firewall where there are two or more interfaces that separate Layer 3 networks. The ASA is considered to be a router hop in the network and can perform NAT between connected networks. Routed mode supports multiple interfaces. Each interface is on a different subnet and requires an IP address on that subnet.
+!
+In which two instances will traffic be denied as it crosses the ASA 5505 device? (Choose two.)
+traffic originating from the inside network going to the DMZ network
+traffic originating from the inside network going to the outside network
+traffic originating from the outside network going to the DMZ network
+traffic originating from the DMZ network going to the inside network
+traffic originating from the outside network going to the inside network
+.
+multiple
+4, 5
+
+Explanation: When an ASA 5505 device is being utilized, traffic is denied as it travels from a lower security zone to a higher security zone. The highest security zone is the internal network, the DMZ is usually the next highest, and the outside network is the lowest. Traffic is only allowed to move from a lower security level to a higher if it is in response to originating traffic within the higher security zone.
+!
+Refer to the exhibit. Based on the security levels of the interfaces on the ASA, what statement correctly describes the flow of traffic allowed on the interfaces?
+Traffic that is sent from the LAN and the Internet to the DMZ is considered inbound.
+Traffic that is sent from the DMZ and the Internet to the LAN is considered outbound.
+Traffic that is sent from the LAN to the DMZ is considered inbound.
+Traffic that is sent from the LAN to the DMZ is considered is considered inbound.
+Traffic that is sent from the DMZ and the LAN to the Internet is considered outbound.
+.
+single
+5
+20-22/8.jpg
+Explanation: When traffic moves from an interface with a higher security level to an interface with a lower security level, it is considered outbound traffic. Conversely, traffic that moves from an interface with a lower security level to an interface with a higher security level is considered inbound traffic.
+!
+Refer to the exhibit. A network administrator is configuring the security level for the ASA. Which statement describes the default result if the administrator tries to assign the Inside interface with the same security level as the DMZ interface?
+The ASA allows inbound traffic initiated on the Internet to the DMZ, but not to the Inside interface.
+The ASA console will display an error message.
+The ASA will not allow traffic in either direction between the Inside interface and the DMZ.
+The ASA allows traffic from the Inside to the DMZ, but blocks traffic initiated on the DMZ to the Inside interface.
+.
+single
+3
+20-22/9.jpg
+Explanation: Multiple interfaces in an ASA can be assigned the same security level. To allow connectivity between interfaces with the same security levels, the same-security-traffic permit inter-interface global configuration command is required. Traffic from the higher level network to the lower level network is allowed by default. However, traffic initiated on the lower level network is denied access to the higher level network by default.
+!
+What can be configured as part of a network object?
+interface type
+IP address and mask
+upper layer protocol
+source and destination MAC address
+.
+single
+2
+
+Explanation: There are two types of objects that can be configured on the Cisco ASA 5505: network objects and service objects. Network objects can be configured with an IP address and mask. Service objects can be configured with a protocol or port ranges.
+!
+What is the function of a policy map configuration when an ASA firewall is being configured?
+binding a service policy to an interface
+binding class maps with actions
+identifying interesting traffic
+using ACLs to match traffic
+.
+single
+2
+
+Explanation: Policy maps are used to bind class maps with actions Class maps are configured to identify Layer 3 and 4 traffic. Service policies are configured to attach the policy map to an interface.
+!
+What is the purpose of configuring an IP address on an ASA device in transparent mode?
+management
+routing
+NAT
+VPN connectivity
+.
+single
+1
+
+Explanation: An ASA device configured in transparent mode functions like a Layer 2 device and does not support dynamic routing protocols, VPNs, QoS, or DHCP.​
+!
+Which license provides up to 50 IPsec VPN users on an ASA 5506-X device?
+the most commonly pre-installed Base license
+a purchased Security Plus upgrade license
+a purchased Base license
+a purchased AnyConnect Premium license
+.
+single
+2
+
+Explanation: The ASA 5506-X commonly has a pre-installed Base license that has the option to upgrade to the Security Plus license. The Security Plus license supports a higher connection capacity and up to 50 IPsec VPN users.
+!
+What mechanism is used by an ASA device to allow inspected outbound traffic to return to the originating sender who is on an inside network?
+access control lists
+Network Address Translation
+security zones
+stateful packet inspection
+.
+single
+4
+
+Explanation: Stateful packet inspection allows return traffic that is sourced on the outside network to be received by the originating sender on the internal network.
+!
+When configuring interfaces on an ASA, which two pieces of information must be included? (Choose two.)
+group association
+service level
+FirePower version
+security level
+access list
+name
+.
+multiple
+4, 6
+
+Explanation: When configuring an ASA, each operational interface must have a name and a security level from 0 (lowest) to 100 (highest) assigned.
+!
+Refer to the exhibit. A network administrator is verifying the security configuration of an ASA. Which command produces the exhibited output?
+show vlan
+show ip interface brief
+show interface ip brief
+show switch vlan
+.
+single
+3
+20-22/16.jpg
+Explanation: Use the show interface ip brief command to verify IP address assignment and interface status on an ASA.
+!
+What interface configuration command is used on an ASA to request an IP address from an upstream DSL device?
+ip address ip-address netmask
+ip address dhcp setroute
+dhcpd address IP_address1 [ -IP_address2 ] if_name
+ip address pppoe
+.
+single
+4
+
+Explanation: Configuring IP addresses on interfaces can be done manually using the ip address command. It can also be accomplished by using DHCP when an interface is connecting to an upstream device providing DHCP services. PPPoE is used when an interface is connecting to an upstream DSL device providing point-to-point connectivity over Ethernet services. The dhcpd address IP_address1 [ -IP_address2 ] if_name command is used to establish the IP address pool on a DHCP server.
+!
+Refer to the exhibit. What kind of NAT is configured on the ASA device?
+dynamic NAT
+Twice NAT
+dynamic PAT
+static NAT
+.
+single
+3
+20-22/18.jpg
+Explanation: From the configuration, the source of IP address translation is the subnet 192.168.5.0/27 and the mapped address is the outside interface. This is an example of dynamic PAT. Dynamic NAT, dynamic PAT, and static NAT are referred to as “network object NAT” because the configuration requires network objects to be configured. Twice NAT identifies both the source and destination address in a single rule ( nat command), and it is used when configuring remote-access IPsec and SSL VPNs.​
+!
+What is the purpose of the Tripwire network testing tool?
+to perform vulnerability scanning
+to provide information about vulnerabilities and aid in penetration testing and IDS signature development
+to assess configuration against established policies, recommended best practices, and compliance standards
+to detect unauthorized wired network access
+to provide password auditing and recovery
+.
+single
+3
+
+Explanation: The Nesus tool provides remote vulnerability scanning that focuses on remote access, password misconfiguration, and DoS against the TCP/IP stack. L0phtcrack provides password auditing and recovery. Metasploit provides information about vulnerabilities and aids in penetration testing and IDS signature development.
+!
+A network analyst is testing the security of the systems and networks of a corporation. What tool could be used to audit and recover passwords?
+L0phtCrack
+SuperScan
+Nessus
+Metasploit
+.
+single
+1
+
+Explanation: Some of the software tools that can be used to perform network testing include:
+!
+In which two instances will traffic be denied as it crosses the ASA 5506-X device? (Choose two.)
+traffic originating from the inside network going to the outside network
+traffic originating from the inside network going to the DMZ network
+traffic originating from the outside network going to the inside network
+traffic originating from the outside network going to the DMZ network
+traffic originating from the DMZ network going to the inside network
+.
+multiple
+3, 5
+
+Explanation: When an ASA 5506-X device is being utilized, traffic is denied as it travels from a lower security zone to a higher security zone. The highest security zone is the internal network, the DMZ is usually the next highest, and the outside network is the lowest. Traffic is only allowed to move from a lower security level to a higher if it is in response to originating traffic within the higher security zone.
+!

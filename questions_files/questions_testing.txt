@@ -1,0 +1,13 @@
+116. Refer to the exhibit. Which statement is true about the effect of this Cisco IOS zone-based policy firewall configuration?
+The firewall will automatically drop all HTTP, HTTPS, and FTP traffic.
+The firewall will automatically allow HTTP, HTTPS, and FTP traffic from s0/0/0 to g0/0 and will track the connections. Tracking the connection allows only return traffic to be permitted through the firewall in the opposite direction.
+The firewall will automatically allow HTTP, HTTPS, and FTP traffic from s0/0/0 to g0/0, but will not track the state of connections. A corresponding policy must be applied to allow return traffic to be permitted through the firewall in the opposite direction.
+The firewall will automatically allow HTTP, HTTPS, and FTP traffic from g0/0 to s0/0/0 and will track the connections. Tracking the connection allows only return traffic to be permitted through the firewall in the opposite direction.
+return traffic to be permitted through the firewall in the opposite direction.
+The firewall will automatically allow HTTP, HTTPS, and FTP traffic from g0/0 to s0/0/0, but will not track the state of connections. A corresponding policy must be applied to allow return traffic to be permitted through the firewall in the opposite direction.
+.
+single
+4
+final/116.jpg
+
+!

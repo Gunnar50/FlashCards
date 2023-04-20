@@ -1,0 +1,279 @@
+1. An administrator defined a local user account with a secret password on router R1 for use with SSH. Which three additional steps are required to configure R1 to accept only encrypted SSH connections? (Choose three.)
+Configure DNS on the router.
+Configure the IP domain name on the router.
+Generate two-way pre-shared keys.
+Configure a host name other than Router.
+Enable inbound vty Telnet sessions.
+Generate crypto keys.
+.
+multiple
+2, 4, 6
+
+Explanation: There are three steps to configure SSH support on a Cisco router: Step 1: Configure a hostname. Step 2: Configure a domain name. Step 3: Generate crypto keys.
+!
+2. Which command will block login attempts on RouterA for a period of 30 seconds if there are 2 failed login attempts within 10 seconds?
+RouterA(config)# login block-for 10 attempts 2 within 30
+RouterA(config)# login block-for 30 attempts 2 within 10
+RouterA(config)# login block-for 2 attempts 30 within 10
+RouterA(config)# login block-for 30 attempts 10 within 2
+.
+single
+2
+
+Explanation: The correct syntax is RouterA(config)# login block-for (number of seconds) attempts (number of attempts) within (number of seconds).
+!
+3. Which two practices are associated with securing the features and performance of router operating systems? (Choose two.)
+Install a UPS.
+Keep a secure copy of router operating system images.
+Configure the router with the maximum amount of memory possible.
+Disable default router services that are not necessary.
+Reduce the number of ports that can be used to access the router.
+.
+multiple
+2, 3
+
+Explanation: Configuring a router with maximum available memory allows support for the widest range of security services and can help to protect against certain DoS attacks. Secure copies of router operating system images and configuration files provide backups needed for device recovery. Installing a UPS device provides physical security for networking devices but does not affect the security of their operating systems. Disabling unnecessary ports and services is part of the process of router hardening, and does not specifically involve the router operating system.
+!
+4. Passwords can be used to restrict access to all or parts of the Cisco IOS. Select the modes and interfaces that can be protected with passwords. (Choose three.)
+VTY interface
+console interface
+Ethernet interface
+boot IOS mode
+privileged EXEC mode
+router configuration mode
+.
+multiple
+1, 2, 5
+
+Explanation: Access to the VTY and console interfaces can be restricted using passwords. Out-of-band management of the router can be restricted in both user EXEC and privileged EXEC modes.
+!
+5. A network administrator enters the service password-encryption command into the configuration mode of a router. What does this command accomplish?
+This command encrypts passwords as they are transmitted across serial WAN links.
+This command prevents someone from viewing the running configuration passwords.
+This command enables a strong encryption algorithm for the enable secret password command.
+This command automatically encrypts passwords in configuration files that are currently stored in NVRAM.
+This command provides an exclusive encrypted password for external service personnel who are required to do router maintenance.
+.
+single
+2
+
+Explanation: The startup-config and running-config files display most passwords in plaintext. Use the service password-encryption global config command to encrypt all plaintext passwords in these files.
+!
+6. On which two interfaces or ports can security be improved by configuring executive timeouts? (Choose two.)
+Fast Ethernet interfaces
+console ports
+serial interfaces
+vty ports
+loopback interfaces
+.
+multiple
+2, 4
+
+Explanation: Executive timeouts allow the Cisco device to automatically disconnect users after they have been idle for the specified time. Console, vty, and aux ports can be configured with executive timeouts.
+!
+7. A security service company is conducting an audit in several risk areas within a major corporation. What statement describes an attack vector?
+data loss through access to personal or corporate instant messaging and social media sites
+the path by which a threat actor can gain access to a server, host, or network
+intercepted emails that reveal confidential corporate or personal information
+the unauthorized transfer of data containing valuable corporate information to a USB drive
+.
+single
+2
+
+-
+!
+8. What is the purpose of mobile device management (MDM) software?
+It is used to create a security policy.
+It is used to implement security policies, setting, and software configurations on mobile devices.
+It is used to identify potential mobile device vulnerabilities.
+It is used by threat actors to penetrate the system.
+.
+single
+2
+
+-
+Explanation: Mobile device management (MDM) software is used with mobile devices so that corporate IT personnel can track the devices, implement security settings, as well as control software configurations.
+9. Which security implementation will provide management plane protection for a network device?
+antispoofing
+routing protocol authentication
+role-based access control
+access control lists
+.
+single
+3
+
+Explanation: Management plane processes typically use protocols such as Telnet and SSH. Role-based access control ensures that only authorized users have management privileges. ACLs perform packet filtering and antispoofing functions on the data plane to secure packets generated by users. Routing protocol authentication on the control plane ensures that a router does not accept false routing updates from neighbor routers.
+!
+10. A security service company is conducting an audit in several risk areas within a major corporation. What statement describes the risk of access to cloud storage devices?
+intercepted emails that reveal confidential corporate or personal information
+gaining illegal access to corporate data by stealing passwords or cracking weak passwords
+sensitive data lost through access to the cloud that has been compromised due to weak security settings
+the retrieval of confidential or personal information from a lost or stolen device that was not configured to use encryption software
+.
+single
+3
+
+-
+!
+11. Which security measure is best used to limit the success of a reconnaissance attack from within a campus area network?
+Implement restrictions on the use of ICMP echo-reply messages.
+Implement a firewall at the edge of the network.
+Implement access lists on the border router.
+Implement encryption for sensitive traffic.
+.
+single
+4
+
+Explanation: The implementation of an access list may provide extra security by permitting denying a flow of traffic, but it will not provide a direct response to limit the success of the attack. The implementation of a firewall on the network edge may prevent reconnaissance attacks from the Internet, but attacks within the local network are not prevented. By implementing restrictions on the sending of ICMP echo-reply messages within a local network, devices may not respond to ping messages, but port scans are not prevented and clear-text data sent on the network are still vulnerable. The best security measure is to encrypt as much network traffic as possible, both user data and network management traffic.
+!
+12. What are two evasion methods used by hackers? (Choose two.)
+scanning
+access attack
+resource exhaustion
+phishing
+encryption
+.
+multiple
+3, 5
+
+Explanation: The following methods are used by hackers to avoid detection:Encryption and tunneling - hide or scramble the malware content: Resource exhaustion - keep the host device too busy to detect the invasion; Traffic fragmentation - split the malware into multiple packets; Protocol-level misinterpretation - sneak by the firewall; Pivot - use a compromised network device to attempt access to another device; Rootkit - allow the hacker to avoid detection as well as hide software installed by the hacker
+!
+14. Which attack involves threat actors positioning themselves between a source and destination with the intent of transparently monitoring, capturing, and controlling the communication?
+man-in-the-middle attack
+SYN flood attack
+DoS attack
+ICMP attack
+.
+single
+1
+
+Explanation: The man-in-the-middle attack is a common IP-related attack where threat actors position themselves between a source and destination to transparently monitor, capture, and control the communication.
+!
+15. What is the motivation of a white hat attacker?
+fine tuning network devices to improve their performance and efficiency
+taking advantage of any vulnerability for illegal personal gain
+studying operating systems of various platforms to develop a new system
+discovering weaknesses of networks and systems to improve the security level of these systems
+.
+single
+4
+
+Explanation: White hat attackers break into networks or computer systems in order to discover weaknesses for the purpose of improving the security of these systems. These break-ins are done with permission from the owner or the organization. Any results are reported back to the owner or the organization.
+!
+16. A user is curious about how someone might know a computer has been infected with malware. What are two common malware behaviors? (Choose two.)
+The computer emits a hissing sound every time the pencil sharpener is used.
+The computer beeps once during the boot process.
+The computer gets increasingly slower to respond.
+No sound emits when an audio CD is played.
+The computer freezes and requires reboots.
+.
+multiple
+3, 5
+
+Explanation: Common symptoms of computers infected with malware: Appearance of files, applications, or desktop icons; Security tools such as antivirus software or firewalls turned off or changed; System crashes; Emails spontaneously sent to others; Modified or missing files; Slow system or browser response; Unfamiliar processes or services running; Unknown TCP or UDP ports open; Connections made to unknown remote devices;
+!
+17. Which security feature or device would more likely be used within a CAN than a SOHO or data center?
+security trap
+ESA/WSA
+virtual security gateway
+wireless router
+exit sensors
+.
+single
+2
+
+Explanation: A Cisco Email Security Appliance (ESA) and Web Security Appliance (WSA) provide advanced threat defense, application visibility and control, reporting, and secure mobility to secure and control email and web traffic at within a campus area network (CAN). A wireless router is a common defense mechanism used in a SOHO. Exit sensors and a security trap are features used within a data center. A virtual security gateway is integrated into Cisco Nexus switches and is used for inter-virtual machine security.
+!
+18. A company has several sales offices distributed within a city. Each sales office has a SOHO network. What are two security features that are commonly found in such a network configuration? (Choose two.)
+biometric verifications
+WPA2
+Virtual Security Gateway within Cisco Nexus switches
+Cisco ASA firewall
+port security on user facing ports
+.
+multiple
+2, 5
+
+Explanation: Small Office and Home Office (SOHO) networks are typically protected using a consumer grade wireless router that includes both wired and wireless connections. WPA2 is commonly used for wireless encryption and port security is used to ensure non-company devices are not plugged into the wired network.
+!
+19. What are two data protection functions provided by MDM? (Choose two.)
+remote wiping
+PIN locking
+inoculation
+quarantine
+physical security
+.
+multiple
+1, 2
+
+Explanation: Data protection functions include PIN locking, encryption, and remote data wiping. In contrast, data loss prevention prevents authorized users from doing careless or malicious things with data important to the organization.
+!
+20. Which condition describes the potential threat created by Instant On in a data center?
+when the primary firewall in the data center crashes
+when an attacker hijacks a VM hypervisor and then launches attacks against other devices in the data center
+when the primary IPS appliance is malfunctioning
+when a VM that may have outdated security policies is brought online after a long period of inactivity.
+.
+single
+4
+
+Explanation: The phrase Instant On describes a potential threat to a VM when it is brought online after it has not been used for a period of time. Because it is offline for a while, it may have outdated security policies that deviate from the baseline security and can introduce security vulnerabilities.
+!
+21. What functional area of the Cisco Network Foundation Protection framework is responsible for device-generated packets required for network operation, such as ARP message exchanges and routing advertisements?
+data plane
+control plane
+management plane
+forwarding plane
+.
+single
+2
+
+Explanation: There are three functional areas of the Cisco Network Foundation Protection (NFP) framework: Control plane: Responsible for routing functions. Consists of the traffic generated by network devices to operate the network. Management plane: Responsible for managing network devices. Data (Forwarding) plane: Responsible for forwarding user data.
+!
+22. A security service company is conducting an audit in several risk areas within a major corporation. What statement describes the risk of using social networking?
+sensitive data lost through access to the cloud that has been compromised due to weak security settings
+gaining illegal access to corporate data by stealing passwords or cracking weak passwords
+data loss through access to personal or corporate instant messaging and social media sites
+the retrieval of confidential or personal information from a lost or stolen device that was not configured to use encryption software
+.
+single
+3
+
+
+!
+23. A security service company is conducting an audit in several risk areas within a major corporation. What statement describes the risk of access to removable media?
+the potential of causing great damage because of direct access to the building and its infrastructure devices
+intercepted emails that reveal confidential corporate or personal information
+the unauthorized transfer of data containing valuable corporate information to a USB drive
+data loss through access to personal or corporate instant messaging and social media sites
+.
+single
+3
+
+
+!
+24. What is the purpose of a reconnaissance attack on a computer network?
+to gather information about the target network and system
+to redirect data traffic so that it can be monitored
+to prevent users from accessing network resources
+to steal data from the network servers
+.
+single
+1
+
+Explanation: Curriculum Reference: Module 1.1
+This item is based on information contained in the presentation.
+Preventing users from accessing network resources is a denial of service attack. Being able to steal data from the network servers may be the objective after a reconnaissance attack gathers information about the target network and system. Redirecting data traffic so it can be monitored is a man-in-the middle attack.
+!
+25. A security service company is conducting an audit in several risk areas within a major corporation. What statement describes an internal threat?
+data loss through access to personal or corporate instant messaging and social media sites
+the unauthorized transfer of data containing valuable corporate information to a USB drive
+the potential of causing great damage because of direct access to the building and its infrastructure devices
+gaining illegal access to corporate data by stealing passwords or cracking weak passwords
+.
+single
+3
+
+
+!
+

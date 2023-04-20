@@ -1,0 +1,237 @@
+Which two statements describe the IPsec protocol framework? (Choose two.)
+AH uses IP protocol 51.
+AH provides integrity and authentication.
+AH provides encryption and integrity.
+ESP uses UDP protocol 51.
+AH provides both authentication and encryption.
+.
+multiple
+1, 2
+
+Explanation: The two primary protocols used with IPsec are AH and ESP. AH is protocol number 51 and provides data authentication and integrity for IP packets that are exchanged between the peers. ESP, which is protocol number 50, performs packet encryption.
+!
+What technology is used to negotiate security associations and calculate shared keys for an IPsec VPN tunnel?
+PSK
+SHA
+3DES
+IKE
+.
+single
+4
+
+Explanation: The Internet Key Exchange (IKE) protocol is a key management protocol standard used when creating an IPsec VPN tunnel. IKE negotiates security associations (SAs) and calculates shared keys.
+!
+What are the two modes used in IKE Phase 1? (Choose two.)
+passive
+primary
+main
+secondary
+aggressive
+.
+multiple
+3, 5
+
+Explanation: The two modes for IKE Phase 1 are main and aggressive. Main mode takes more time because the identity of the IKE peers are hidden from eavesdroppers.
+!
+What takes place during IKE Phase 2 when establishing an IPsec VPN?
+Traffic is exchanged between IPsec peers.
+IPsec security associations are exchanged.
+ISAKMP security associations are exchanged.
+Interesting traffic is identified.
+.
+single
+2
+
+Explanation: During IKE Phase 2, IPsec peers exchange the IPsec security associations (SAs) that each peer is willing to use to establish the IPsec tunnel.
+!
+Refer to the exhibit. A VPN tunnel is configured on the WAN between R1 and R2. On which R1 interface(s) would a crypto map be applied in order to create a VPN between R1 and R2?
+G0/0 and G0/1
+G0/0
+all R1 interfaces
+S0/0/0
+.
+single
+4
+18-19/6.jpg
+Explanation: The crypto map command is used to finish creating the IPsec security policy by doing the following
+!
+Router R1 has configured ISAKMP policies numbered 1, 5, 9, and 203. Router R2 only has default policies. How will R1 attempt to negotiate the IKE Phase 1 ISAKMP tunnel with R2?
+R1 and R2 cannot match policies because the policy numbers are different.
+R1 will attempt to match policy #1 with the most secure matching policy on R2.
+R1 will try to match policy #203 with the most secure default policy on R2.
+R1 will begin to try to match policy #1 with policy #65514 on R2.
+.
+single
+2
+
+Explanation: Peers will attempt to negotiate using the policy with the lowest number (highest priority). Peers do not require matching priority numbers. R1 will attempt to use the most secure default policy (policy #1). If R2 has a matching policy, then R1 and R2 can successfully negotiate the IKE Phase 1 ISAKMP tunnel. If there is no agreement to use the most secure default policy, R1 will attempt to use the next most secure policy.
+!
+When the CLI is used to configure an ISR for a site-to-site VPN connection, what is the purpose of the crypto map command in interface configuration mode?
+to configure the transform set
+to bind the interface to the ISAKMP policy
+to force IKE Phase 1 negotiations to begin
+to negotiate the SA policy
+.
+single
+2
+
+Explanation: The crypto map command, along with the name of the policy, is used to bind the interface to the ISAKMP policy created previously. A transform set is configured using the crypto ipsec transform-set command. Interesting traffic between peers forces IKE Phase 1 negotiations to begin. Peers negotiate the ISAKMP SA policy in step 2 of IPsec negotiations.
+!
+Which statement describes the effect of key length in deterring an attacker from hacking through an encryption key?
+The length of a key does not affect the degree of security.
+The shorter the key, the harder it is to break.
+The length of a key will not vary between encryption algorithms.
+The longer the key, the more key possibilities exist.
+.
+single
+4
+
+Explanation: While preventing brute-force attacks and other forced decryption concerns, the longer the key length, the harder it is to break. A 64-bit key can take one year to break with a sophisticated computer, while a 128-bit key may take 1019 years to decrypt. Different encryption algorithms will provide varying key lengths for implementation.
+!
+Which two statements describe a remote access VPN? (Choose two.)
+It may require VPN client software on hosts.
+It requires hosts to send TCP/IP traffic through a VPN gateway.
+It connects entire networks to each other.
+It is used to connect individual hosts securely to a company network over the Internet.
+It requires static configuration of the VPN tunnel.
+.
+multiple
+1, 4
+
+Explanation: Remote access VPNs can be used to support the needs of telecommuters and mobile users by allowing them to connect securely to company networks over the Internet. To connect hosts to the VPN server on the corporate network, the remote access VPN tunnel is dynamically built by client software that runs on the hosts.
+!
+Which protocol creates a virtual point-to-point connection to tunnel unencrypted traffic between Cisco routers from a variety of protocols?
+IKE
+IPsec
+OSPF
+GRE
+.
+single
+4
+
+Explanation: Generic Routing Encapsulation (GRE) is a tunneling protocol developed by Cisco that encapsulates multiprotocol traffic between remote Cisco routers. GRE does not encrypt data. OSPF is a open source routing protocol. IPsec is a suite of protocols that allow for the exchange of information that can be encrypted and verified. Internet Key Exchange (IKE) is a key management standard used with IPsec.
+!
+How is "tunneling" accomplished in a VPN?
+New headers from one or more VPN protocols encapsulate the original packets.
+All packets between two hosts are assigned to a single physical medium to ensure that the packets are kept private.
+Packets are disguised to look like other types of traffic so that they will be ignored by potential attackers.
+A dedicated circuit is established between the source and destination devices for the duration of the connection.
+.
+single
+1
+
+Explanation: Packets in a VPN are encapsulated with the headers from one or more VPN protocols before being sent across the third party network. This is referred to as "tunneling". These outer headers can be used to route the packets, authenticate the source, and prevent unauthorized users from reading the contents of the packets.
+!
+Which two scenarios are examples of remote access VPNs? (Choose two.)
+All users at a large branch office can access company resources through a single VPN connection.
+A small branch office with three employees has a Cisco ASA that is used to create a VPN connection to the HQ.
+A toy manufacturer has a permanent VPN connection to one of its parts suppliers.
+A mobile sales agent is connecting to the company network via the Internet connection at a hotel.
+An employee who is working from home uses VPN client software on a laptop in order to connect to the company network.
+.
+multiple
+4, 5
+
+Explanation: Remote access VPNs connect individual users to another network via a VPN client that is installed on the user device. Site-to-site VPNs are "always on" connections that use VPN gateways to connect two sites together. Users at each site can access the network on the other site without having to use any special clients or configurations on their individual devices.
+!
+Which statement accurately describes a characteristic of IPsec?
+IPsec works at the application layer and protects all application data.
+IPsec is a framework of standards developed by Cisco that relies on OSI algorithms.
+IPsec is a framework of proprietary standards that depend on Cisco specific algorithms.
+IPsec works at the transport layer and protects data at the network layer.
+IPsec is a framework of open standards that relies on existing algorithms.
+.
+single
+5
+
+Explanation: IPsec can secure a path between two network devices. IPsec can provide the following security functions:
+!
+Which is a requirement of a site-to-site VPN?
+It requires hosts to use VPN client software to encapsulate traffic.
+It requires the placement of a VPN server at the edge of the company network.
+It requires a VPN gateway at each end of the tunnel to encrypt and decrypt traffic.
+It requires a client/server architecture.
+.
+single
+3
+
+Explanation: Site-to-site VPNs are static and are used to connect entire networks. Hosts have no knowledge of the VPN and send TCP/IP traffic to VPN gateways. The VPN gateway is responsible for encapsulating the traffic and forwarding it through the VPN tunnel to a peer gateway at the other end which decapsulates the traffic.
+!
+Consider the following configuration on a Cisco ASA: crypto ipsec transform-set ESP-DES-SHA esp-des esp-sha-hmac. What is the purpose of this command?
+to define the ISAKMP parameters that are used to establish the tunnel
+to define the encryption and integrity algorithms that are used to build the IPsec tunnel
+to define what traffic is allowed through and protected by the tunnel
+to define only the allowed encryption algorithms
+.
+single
+2
+
+Explanation: The transform set is negotiated during Phase 2 of the IPsec VPN connection process. The purpose of the transform set is to define what encryption and authentication schemes can be used. The device doing the VPN initiation offers the acceptable transform sets in order of preference, in this case, ESP authentication using DES for encryption or ESP authentication using SHA-HMAC authentication and integrity for the data payload. Remember that ESP provides confidentiality with encryption and integrity with authentication. The ESP-DES-SHA is the name of the transform set. The parameters that follow (esp-des and esp-sha-hmac) are the specific types of encryption or authentication that is supported by the ASA for the VPN tunnel that uses this transform set.
+!
+What is needed to define interesting traffic in the creation of an IPsec tunnel?
+security associations
+hashing algorithm
+access list
+transform set
+.
+single
+3
+
+Explanation: In order to bring up an IPsec tunnel, an access list must be configured with a permit statement that will identify interesting traffic. Once interesting traffic is detected by matching the access list, the tunnel security associations can be negotiated.
+!
+What is a function of the GRE protocol?
+to configure the set of encryption and hashing algorithms that will be used to transform the data sent through the IPsec tunnel
+to encapsulate multiple OSI Layer 3 protocol packet types inside an IP tunnel
+to configure the IPsec tunnel lifetime
+to provide encryption through the IPsec tunnel
+.
+single
+2
+
+Explanation: The transform set is the set of encryption and hashing algorithms that will be used to transform the data sent through the IPsec tunnel. GRE supports multiprotocol tunneling. It can encapsulate multiple OSI Layer 3 protocol packet types inside an IP tunnel. Routing protocols that are used across the tunnel enable dynamic exchange of routing information in the virtual network. GRE does not provide encryption.​
+!
+Refer to the exhibit. What HMAC algorithm is being used to provide data integrity?
+MD5
+AES
+SHA
+DH
+.
+single
+3
+18-19/19.jpg
+Explanation: Two popular algorithms that are used to ensure that data is not intercepted and modified (data integrity) are MD5 and SHA. The command Router1(config-isakmp)# hash sha indicates that SHA is being used. AES is an encryption protocol and provides data confidentiality. DH (Diffie-Hellman) is an algorithm that is used for key exchange. RSA is an algorithm used for authentication.
+!
+Two corporations have just completed a merger. The network engineer has been asked to connect the two corporate networks without the expense of leased lines. Which solution would be the most cost effective method of providing a proper and secure connection between the two corporate networks?
+Cisco AnyConnect Secure Mobility Client with SSL
+Cisco Secure Mobility Clientless SSL VPN
+Frame Relay
+remote access VPN using IPsec
+site-to-site VPN
+.
+single
+5
+
+Explanation: The site-to-site VPN is an extension of a classic WAN network that provides a static interconnection of entire networks. Frame Relay would be a better choice than leased lines, but would be more expensive than implementing site-to-site VPNs. The other options refer to remote access VPNs which are better suited for connecting users to the corporate network versus interconnecting two or more networks.
+!
+Refer to the exhibit. What show command displays whether the securityk9 software is installed on the router and whether the EULA license has been activated? What show command displays whether the securityk9 software is installed on the router and whether the EULA license has been activated
+show running-config
+show version
+show interfaces s0/0/0
+show crypto isakmp policy 1
+.
+single
+2
+18-19/21.jpg
+Explanation: The show version command displays the status of technology packages on the router. Based on the partial output shown, the router software already includes ipbasek9 and securityk9. The EvalRightToUse parameter shows that the license is active thereby giving access to the cryptographic features, IPsec and ISAKMP, required to create an IPsec VPN.
+!
+What type of traffic is supported by IPsec?
+IPsec supports all IPv4 traffic.
+IPsec supports layer 2 multicast traffic.
+IPsec supports all traffic permitted through an ACL.
+IPsec only supports unicast traffic.
+.
+single
+4
+
+Explanation
+!

@@ -1,0 +1,312 @@
+Which privilege level is predefined for the privileged EXEC mode?
+level 0
+level 1
+level 15
+level 16
+.
+single
+3
+
+Explanation: Privileged EXEC mode (privilege level 15) is reserved for the enable mode privileges (all enable-level commands). Users can change configurations and view configuration files.
+!
+What is a requirement to use the Secure Copy Protocol feature?
+At least one user with privilege level 1 has to be configured for local authentication.
+A command must be issued to enable the SCP server side functionality.
+A transfer can only originate from SCP clients that are routers.
+The Telnet protocol has to be configured on the SCP server side.
+.
+single
+2
+
+Explanation: The Secure Copy Protocol feature relies on SSH and requires that AAA authentication and authorization be configured so that the router can determine whether the user has the correct privilege level. For local authentication, at least one user with privilege level 15 has to be configured. Transfers can originate from any SCP client whether that client is another router, switch, or workstation. The ip scp server enable command has to be issued to enable the SCP server side functionality.
+!
+Which three items are prompted for a user response during interactive AutoSecure setup? (Choose three.)
+IP addresses of interfaces
+content of a security banner
+enable secret password
+services to disable
+enable password
+interfaces to enable
+.
+multiple
+2, 3, 5
+
+Explanation: During AutoSecure setup, the following steps occur: – The auto secure command is entered. – The wizard gathers information about the outside interfaces. – AutoSecure secures the management place by disabling unnecessary services. – AutoSecure prompts for a security banner. – AutoSecure prompts for passwords and enables password and login features. – Interfaces are secured. – The forwarding plane is secured.
+!
+Which syslog message type is accessible only to an administrator and only via the Cisco CLI?
+errors
+alerts
+debugging
+emergency
+.
+single
+3
+
+Explanation: Syslog messages can be sent to the logging buffer, the console line, the terminal line, or to a syslog server. However, debug-level messages are only forwarded to the internal buffer and only accessible through the Cisco CLI.
+!
+Refer to the exhibit. What two statements describe the NTP status of the router? (Choose two.)
+The router is serving as an authoritative time source.
+The software clock for the router must be configured with the set clock command so that NTP will function properly.
+The router is attached to a stratum 2 device.
+The router is serving as a time source for the device at 192.168.1.1.
+The IP address of the time source for the router is 192.168.1.1.
+.
+multiple
+3, 5
+5-7/5.jpg
+Explanation: The show ntp status command displays information about how NTP is operating on the device. The output shows that the router clock is synchronized with the NTP server with the address of 192.168.1.1. NTP is hierarchical. The router is a stratum 3 device, therefore it’s time source is a stratum 2 device. Authoritative time sources in the NTP system are located at stratum 0.
+!
+An administrator needs to create a user account with custom access to most privileged EXEC commands. Which privilege command is used to create this custom account?
+privilege exec level 15
+privilege exec level 0
+privilege exec level 1
+privilege exec level 2
+.
+single
+4
+
+Explanation: In Cisco IOS software, there are 16 privilege levels: Level 0 : Predefined for user-level access privileges. Level 1 : The default level for login with the router prompt Router>. Levels 2 -14 : May be customized for user-level privileges. Commands from lower levels may be moved up to another higher level, or commands from higher levels may be moved down to a lower level. Level 15 : Reserved for the enable mode privileges (enable command). To configure a privilege level with specific commands for a customized user level, use the privilege exec level level [ command ], where level could be between 2 to 14.
+!
+A network administrator is analyzing the features supported by the multiple versions of SNMP. What are two features that are supported by SNMPv3 but not by SNMPv1 or SNMPv2c? (Choose two.)
+message encryption
+community-based security
+SNMP trap mechanism
+message source validation
+bulk retrieval of MIB information
+.
+multiple
+1, 4
+
+Explanation: SNMPv3 provides message integrity to ensure that a packet was not tampered with and authentication to determine if the message is from a valid source. SNMPv3 also supports message encryption. SNMPv1 and SNMPv2 do not support message encryption, but do support community strings. SNMPv2c supports bulk retrieval operation. All SNMP versions support the SNMP trap mechanism.
+!
+A network administrator is configuring an AAA server to manage TACACS+ authentication. What are two attributes of TACACS+ authentication? (Choose two.)
+TCP port 40
+encryption for all communication
+single process for authentication and authorization
+UDP port 1645
+encryption for only the password of a user
+separate processes for authentication and authorization
+.
+multiple
+2, 6
+
+Explanation: TACACS+ authentication includes the following attributes: Separates authentication and authorization processes Encrypts all communication, not just passwords Utilizes TCP port 49
+!
+What are two characteristics of the RADIUS protocol? (Choose two.)
+encryption of the entire body of the packet
+encryption of the password only
+the use of UDP ports for authentication and accounting
+the separation of the authentication and authorization processes
+the use of TCP port 49
+.
+multiple
+2, 3
+
+Explanation: RADIUS is an open-standard AAA protocol using UDP port 1645 or 1812 for authentication and UDP port 1646 or 1813 for accounting. It combines authentication and authorization into one process.
+!
+What is the one major difference between local AAA authentication and using the login local command when configuring device access authentication?
+The login local command requires the administrator to manually configure the usernames and passwords, but local AAA authentication does not.
+Local AAA authentication allows more than one user account to be configured, but login local does not.
+Local AAA authentication provides a way to configure backup methods of authentication, but login local does not.
+The login local command uses local usernames and passwords stored on the router, but local AAA authentication does not.
+.
+single
+3
+
+Explanation: Local AAA authentication works very similar to the login local command, except that it allows you to specify backup authentication methods as well. Both methods require that local usernames and passwords be manually configured on the router.
+!
+Which two UDP port numbers may be used for server-based AAA RADIUS authentication? (Choose two.)
+1812
+1645
+1813
+1646
+49
+.
+multiple
+1, 2
+
+Explanation: RADIUS authentication and accounting utilize the following UDP port numbers: UDP port 1645 or 1812 for authentication UDP port 1646 or 1813 for accounting TACACS+ uses TCP port 49.
+!
+Which command will move the show access-lists command to privilege level 14?
+router(config)# privilege level 14 command show access-lists
+router(config)# privilege exec level 14 show access-lists
+router(config)# set privilege level 14 show access-lists
+router(config)# show access-lists privilege level 14
+.
+single
+2
+
+Explanation: To configure a privilege level with specific commands, use the privilege exec level level [ command ].
+!
+Which authentication method stores usernames and passwords in the router and is ideal for small networks?
+server-based AAA over TACACS+
+local AAA over RADIUS
+server-based AAA
+local AAA over TACACS+
+local AAA
+server-based AAA over RADIUS
+.
+single
+5
+
+Explanation: In a small network with a few network devices, AAA authentication can be implemented with the local database and with usernames and passwords stored on the network devices. Authentication using the TACACS+ or RADIUS protocol will require dedicated ACS servers although this authentication solution scales well in a large network.
+!
+What are three characteristics of superviews in the Cisco role-based CLI access feature? (Choose three.)
+A user uses the command enable view superview-name to enter a superview.
+A user uses a superview to configure commands inside associated CLI views.
+Commands cannot be configured for a superview.
+Level 15 privilege access is used to configure a new superview.
+Deleting a superview does not delete the associated CLI views.
+A single CLI view can be shared within multiple superviews.
+.
+multiple
+3, 5, 6
+
+Explanation: Cisco role-based Superviews have several specific characteristics: – A single CLI view can be shared within multiple superviews. – Commands cannot be configured for a superview. An administrator must add commands to the CLI view and add that CLI view to the superview. – Users who are logged into a superview can access all the commands that are configured for any of the CLI views that are part of the superview. – Each superview has a password that is used to switch between superviews or from a CLI view to a superview. – Deleting a superview does not delete the associated CLI views. The CLI views remain available to be assigned to another superview. – Only a root view user can configure a new view and add or remove commands from the existing views.
+!
+A student is learning about role-based views and role-based view configurations. The student enters the Router(config)# parser view TECH-view command. What is the purpose of this command?
+to create a CLI view named TECH-view
+to enter the superview named TECH-view
+to check the current setup of the CLI view named TECH-view
+to enter the CLI view named TECH-view
+.
+single
+1
+
+Explanation: The command Router(config)# parser view [ view-name ] is used to create a new CLI view. The command Router(config)# parser view [ view-name ] superview is used to create a new superview view.
+!
+Refer to the exhibit. A student uses the show parser view all command to see a summary of all views configured on router R1. What is indicated by the symbol * next to JR-ADMIN?
+It is a root view.
+It is a CLI view without a command configured.
+It is a superview.
+It is a CLI view.
+.
+single
+3
+5-7/16.jpg
+Explanation: From the root view, a network administrator can see a summary of all role-based views by using the show parser view all command. An asterisk identifies a superview.
+!
+What are two characteristics of the Cisco IOS Resilient Configuration feature? (Choose two.)
+It maintains a mirror image of the configuration file in RAM.
+It sends a backup copy of the IOS image to a TFTP server.
+It saves a secure copy of the primary image and device configuration that cannot be removed by a user.
+It minimizes the downtime of a device that has had the image and configuration deleted.
+It is a universal feature that can be activated on all Cisco devices.
+.
+multiple
+3, 4
+
+Explanation: The Cisco IOS Resilient Configuration stores a secure copy of the primary image file and device configuration. These secure files cannot be removed by a user. Its main function is to speed up the recovery time if a device has been compromised and the image file and the device configuration have been deleted. This feature is only available on platforms that support a PCMCIA ATA disk with enough storage space.
+!
+What IOS privilege levels are available to assign for custom user-level privileges?
+levels 1 through 15
+levels 0, 1, and 15
+levels 2 through 14
+levels 0 and 1
+.
+single
+3
+
+Explanation: There are 16 privilege levels that can be applied to user accounts. Levels 0, 1, and 15 have predefined settings. This leaves levels 2 through 14 available for creating custom levels of access.
+!
+Refer to the exhibit. What information in the syslog message identifies the facility?
+ADJCHG
+Loading Done
+OSPF
+level 5
+.
+single
+3
+5-7/19.jpg
+Explanation: The facility is a service identifier used to categorize and identify the messages being generated by a device using syslog. The facility of OSPF identifies this syslog message as being from the OSPF protocol. Level 5 is the severity level of this message. ADJCHG is the mnemonic to describe the action occurring. Loading Done is part of the description of the event that occurred.​
+!
+What is the biggest issue with local implementation of AAA?
+Local implementation supports only TACACS+ servers.
+Local implementation cannot provide secure authentication.
+Local implementation does not scale well.
+Local implementation supports only RADIUS servers.
+.
+single
+3
+
+Explanation: One of the purposes of AAA is to provide secure authentication to network devices. Local implementation does not use RADIUS or TACACS+ servers. It relies on a local database to authenticate all users. This can be a problem in a network that has many devices with hundreds of users or more.
+!
+Which task is necessary to encrypt the transfer of data between the ACS server and the AAA-enabled router?
+Configure the key exactly the same way on the server and the router.
+Specify the single-connection keyword.
+Create a VPN tunnel between the server and the router.
+Use identical reserved ports on the server and the router.
+.
+single
+1
+
+Explanation: The key command is used to configure the shared secret key that is used for encryption. The key must be configured the exact same way on the router and on the ACS server. The creation of a VPN tunnel is unnecessary. Neither the configuration of ports nor the use of the single-connection command has any effect on encryption.
+!
+Refer to the exhibit. Based on the output of the show running-config command, which type of view is SUPPORT?
+CLI view, containing SHOWVIEW and VERIFYVIEW commands
+superview, containing SHOWVIEW and VERIFYVIEW views
+secret view, with a level 5 encrypted password
+root view, with a level 5 encrypted secret password
+.
+single
+2
+5-7/22.jpg
+Explanation: The superview role-based CLI view named SUPPORT has been configured on the router. The SUPPORT suerview consists of two CLI views called SHOWVIEW and VERIFYVIEW.
+!
+A student is learning role-based CLI access and CLI view configurations. The student opens Packet Tracer and adds a router. Which command should be used first for creating a CLI view named TECH-View?
+Router# enable view
+Router(config)# aaa new-model
+Router# enable view TECH-view
+Router(config)# parser view TECH-view
+.
+single
+2
+
+Explanation: Before an administrator can create a view for role-based CLI access, AAA must be enabled using the aaa new-model command.
+!
+A network engineer is implementing security on all company routers. Which two commands must be issued to force authentication via the password 1A2b3C for all OSPF-enabled interfaces in the backbone area of the company network? (Choose two.)
+area 0 authentication message-digest
+ip ospf message-digest-key 1 md5 1A2b3C
+username OSPF password 1A2b3C
+enable password 1A2b3C
+area 1 authentication message-digest
+.
+multiple
+1, 2
+
+Explanation: The two commands that are necessary to configure authentication via the password 1A2b3C for all OSPF-enabled interfaces in the backbone area (Area 0) of the company network would be ip ospf message-digest-key 1 md5 1A2b3C and area 0 authentication message-digest. The option area 1 authentication message-digest is incorrect because it refers to Area 1, not Area 0. The option enable password 1A2b3C is incorrect because it would set the privileged EXEC mode password instead of the OSPF authentication password. The option username OSPF password 1A2b3C is required to create a username database in a router, which is not required with OSPF authentication.
+!
+Because of implemented security controls, a user can only access a server with FTP. Which AAA component accomplishes this?
+accessibility
+accounting
+auditing
+authentication
+authorization
+.
+single
+5
+
+Explanation: One of the components in AAA is authorization. After a user is authenticated through AAA, authorization services determine which resources the user can access and which operations the user is allowed to perform.
+!
+Which AAA component can be established using token cards?
+accounting
+authorization
+auditing
+authentication
+.
+single
+4
+
+Explanation: The authentication component of AAA is established using username and password combinations, challenge and response questions, and token cards. The authorization component of AAA determines which resources the user can access and which operations the user is allowed to perform. The accounting and auditing component of AAA keeps track of how network resources are used.
+!
+What is the primary function of the aaa authorization command?
+permit AAA server access to AAA client services
+limit authenticated user access to AAA client services
+permit authenticated user access to AAA client services
+limit AAA server access to AAA client services
+.
+single
+2
+
+Explanation: Authorization is concerned with allowing and disallowing authenticated users access to certain areas and programs on the network as well as specific services. Controlling access to configuration commands greatly simplifies the infrastructure security in large enterprise networks.
+!
