@@ -1,57 +1,65 @@
 import os.path
 import random
 
+import pydantic
 import pygame
 
 import gui
 import settings
 
 
+class Card(pydantic.BaseModel):
+  question: str
+  options: list[str]
+  answers: list[int]
+  image_path: str | None = None
+  explanation: str | None = None
+
+
 class FlashCard:
-  def __init__(self, number, card, screen, active=False, show_answer=False):
-    self.number = number
+  def __init__(self, card: Card, index: int, screen: pygame.Surface):
+    self.index = index
     self.card = card
     self.screen = screen
     self.x, self.y = 50, 50
     self.options_wrap_width = settings.WIDTH - 200
-    self.active = active
-    self.show_answer = show_answer
+    self.show_answer = False
     self.question = gui.TextWrap(
-      card[0], self.x, self.y, wrap_width=settings.WIDTH - 200
+      card.question, self.x, self.y, wrap_width=settings.WIDTH - 200
     )
-    self.choices = card[1]
-    self.randomize_choices = self.choices.copy()
+    self.options = card.options
+    self.randomize_choices = self.options.copy()
 
-    self.question_type = card[2]
-    self.image_path = card[4]
-    if self.image_path != '':
-      # print(self.image_path)
+    self.image_path = card.image_path
+    if self.image_path is not None:
       self.image = pygame.image.load(os.path.join('images', self.image_path))
-    self.explanation = gui.TextWrap(
-      card[5], self.x, 400, wrap_width=settings.WIDTH - 200
-    )
-    self.correct_answer = False
-    self.setup_choices()
+
+    self.explanation: gui.TextWrap | None
+    if card.explanation is not None:
+      self.explanation = gui.TextWrap(
+        card.explanation, self.x, 400, wrap_width=settings.WIDTH - 200
+      )
+    else:
+      self.explanation = None
+
+    self.is_correct_answer = False
+    self.setup_options()
 
   def __repr__(self):
-    return str(self.number)
+    return str(self.index)
 
-  def setup_choices(self):
+  def setup_options(self):
     random.shuffle(self.randomize_choices)
+    self.answers: list[str] = []
+    for index in self.card.answers:
+      self.answers.append(self.options[int(index) - 1])
     self.choices_text_wrap()
-    if self.question_type == 'single':
-      self.answer = self.choices[int(self.card[3]) - 1]
-    else:
-      self.answer = []
-      temp = self.card[3].split(',')
-      for index in temp:
-        self.answer.append(self.choices[int(index) - 1])
 
   def choices_text_wrap(self):
     self.choices_wrap = []
-    for i, choice in enumerate(self.randomize_choices):
-      if i == 0:
-        if self.image_path == '':
+    for index, choice in enumerate(self.randomize_choices):
+      if index == 0:
+        if self.image_path is None:
           self.choices_wrap.append(
             gui.TextWrap(
               choice,
@@ -83,8 +91,8 @@ class FlashCard:
           )
 
       else:
-        previous_choice = self.choices_wrap[i - 1]
-        if self.image_path == '':
+        previous_choice = self.choices_wrap[index - 1]
+        if self.image_path is None:
           self.choices_wrap.append(
             gui.TextWrap(
               choice,
@@ -114,20 +122,26 @@ class FlashCard:
             )
           )
 
-    if self.question_type == 'single':
-      self.options_single = gui.RadioButton(
-        self.screen, self.choices_wrap, 0, 0
-      )
+    self.ui_options: list[gui.CheckBox | gui.RadioButton] = []
+    if len(self.answers) == 1:
+      self.ui_options = [
+        gui.RadioButton(
+          self.screen,
+          self.choices_wrap,
+          0,
+          0,
+        )
+      ]
     else:
-      self.options_multiple = []
-      for choice in self.choices_wrap:
-        self.options_multiple.append(
+      # TODO: Update checkboxes to create the checkboxes within the object, like radio buttons are
+      for choice_wrap in self.choices_wrap:
+        self.ui_options.append(
           gui.CheckBox(
             self.screen,
-            choice.x,
-            choice.y,
-            choice.text,
-            choice,
+            choice_wrap.x,
+            choice_wrap.y,
+            choice_wrap.text,
+            choice_wrap,
             right_text=True,
           )
         )
@@ -135,7 +149,7 @@ class FlashCard:
   def draw(self, screen):
     # show the question
     if not self.show_answer:
-      if self.image_path != '':
+      if self.image_path is not None:
         if self.image.get_height() < 250:
           screen.blit(
             self.image,
@@ -150,43 +164,35 @@ class FlashCard:
             ),
           )
       self.question.draw(screen)
-      if self.question_type == 'single':
-        self.options_single.draw()
-      else:
-        for option in self.options_multiple:
-          option.draw()
+      for option in self.ui_options:
+        option.draw()
 
     # show answer
     else:
       self.text.draw(screen)
-      if self.question_type == 'single':
-        self.answer_text.draw(screen)
-        self.explanation.y = (
-          self.answer_text.y + self.answer_text.render_text.get_height() + 50
-        )
-      else:
-        for a in self.answer_text:
-          a.draw(screen)
+      for answer in self.answer_text:
+        answer.draw(screen)
+      if self.explanation is not None:
         self.explanation.y = (
           self.answer_text[-1].y
           + self.answer_text[-1].render_text.get_height()
           + 50
         )
+        self.explanation.draw(screen)
 
-      self.explanation.draw(screen)
-
-  def get_answer(self):
-    if self.question_type == 'single':
-      self.correct_answer = self.options_single.get() == self.answer
-
-    else:
-      options_values = []
-      for option in self.options_multiple:
+  def get_answer(self) -> None:
+    options_values = []
+    for option in self.ui_options:
+      if isinstance(option, gui.CheckBox):
         if option.get():
           options_values.append(option.text)
-      self.correct_answer = self.check_multiple_answer(options_values)
+      else:
+        if text := option.get():
+          options_values.append(text)
 
-    if self.correct_answer:
+    self.is_correct_answer = self.check_answer(options_values)
+
+    if self.is_correct_answer:
       self.text = gui.Text(
         'CORRECT!     Answer:', self.x, self.y, font_colour=settings.WHITE
       )
@@ -198,47 +204,37 @@ class FlashCard:
       'Explanation', self.x, 460, font_colour=settings.WHITE
     )
 
-    if self.question_type == 'single':
-      self.answer_text = gui.TextWrap(
-        self.answer,
-        50,
-        self.y + self.text.font_render.get_height() + 30,
-        wrap_width=1000,
-      )
-    else:
-      self.answer_text = []
-      for i, option in enumerate(self.answer):
-        if i == 0:
-          self.answer_text.append(
-            gui.TextWrap(
-              option,
-              50,
-              self.y + self.text.font_render.get_height() + 30,
-              wrap_width=1000,
-            )
+    self.answer_text: list[gui.TextWrap] = []
+    for index, answer in enumerate(self.answers):
+      if index == 0:
+        self.answer_text.append(
+          gui.TextWrap(
+            answer,
+            50,
+            self.y + self.text.font_render.get_height() + 30,
+            wrap_width=1000,
           )
-        else:
-          previous_answer = self.answer_text[i - 1]
-          self.answer_text.append(
-            gui.TextWrap(
-              option,
-              50,
-              previous_answer.y + previous_answer.wrap_text.get_height() + 30,
-              wrap_width=1000,
-            )
+        )
+      else:
+        previous_answer = self.answer_text[index - 1]
+        self.answer_text.append(
+          gui.TextWrap(
+            answer,
+            50,
+            previous_answer.y + previous_answer.wrap_text.get_height() + 30,
+            wrap_width=1000,
           )
+        )
 
-  def check_multiple_answer(self, user_answer):
-    if len(user_answer) == len(self.answer):
-      for a in user_answer:
-        if a not in self.answer:
-          return False
-      return True
-    return False
+  def check_answer(self, user_answer: list[str]) -> bool:
+    if len(user_answer) != len(self.answers):
+      return False
 
-  def handle_events(self, event):
-    if self.question_type == 'single':
-      self.options_single.is_clicked(event)
-    else:
-      for option in self.options_multiple:
-        option.is_clicked(event)
+    for answer in user_answer:
+      if answer not in self.answers:
+        return False
+    return True
+
+  def handle_events(self, event) -> None:
+    for option in self.ui_options:
+      option.is_clicked(event)

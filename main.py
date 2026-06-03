@@ -3,7 +3,6 @@ import random
 
 import pygame
 
-from file_handle import get_questions
 import settings
 import sprites
 
@@ -14,36 +13,43 @@ class Game:
     self.screen = pygame.display.set_mode((settings.WIDTH, settings.HEIGHT))
     pygame.display.set_caption(settings.TITLE)
     self.clock = pygame.time.Clock()
-    self.questions = get_questions()
-    self.flash_cards = []
+    self.flash_cards: list[sprites.FlashCard] = []
     self.correct_questions = []
     self.create_cards()
     self.is_question = True
 
   def create_cards(self):
+    with open('questions_files/questions_test.json') as f:
+      questions = json.load(f)
     ordered_flash_cards = []
-    for number, card in enumerate(self.questions):
-      ordered_flash_cards.append(sprites.FlashCard(number, card, self.screen))
+    for index, card in enumerate(questions):
+      ordered_flash_cards.append(
+        sprites.FlashCard(
+          sprites.Card(**card),
+          index,
+          self.screen,
+        )
+      )
 
     try:
       with open('cards.json') as f:
         data = json.load(f)
 
-      for number in data['card_order']:
+      for index in data['card_order']:
         card = next(
-          (card for card in ordered_flash_cards if card.number == number), None
+          (card for card in ordered_flash_cards if card.index == index), None
         )
         if card:
           self.flash_cards.append(card)
 
-      for number in data['correct_order']:
+      for index in data['correct_order']:
         card = next(
-          (card for card in ordered_flash_cards if card.number == number), None
+          (card for card in ordered_flash_cards if card.index == index), None
         )
         if card:
           self.correct_questions.append(card)
 
-      print(data['card_order'] == [card.number for card in self.flash_cards])
+      print(data['card_order'] == [card.index for card in self.flash_cards])
       print(self.correct_questions)
 
     except FileNotFoundError:
@@ -72,8 +78,8 @@ class Game:
         with open('cards.json', 'w') as f:
           json.dump(
             {
-              'card_order': [card.number for card in self.flash_cards],
-              'correct_order': [card.number for card in self.correct_questions],
+              'card_order': [card.index for card in self.flash_cards],
+              'correct_order': [card.index for card in self.correct_questions],
             },
             f,
           )
@@ -85,7 +91,7 @@ class Game:
           if self.is_question:
             self.flash_cards[-1].get_answer()
             self.flash_cards[-1].show_answer = True
-            if self.flash_cards[-1].correct_answer:
+            if self.flash_cards[-1].is_correct_answer:
               if self.flash_cards[-1] not in self.correct_questions:
                 self.correct_questions.append(self.flash_cards[-1])
             else:
@@ -105,7 +111,7 @@ class Game:
           self.flash_cards[-1].handle_events(event)
 
   def place_card_back(self):
-    if self.flash_cards[-1].correct_answer:
+    if self.flash_cards[-1].is_correct_answer:
       index = 0
 
     else:
@@ -121,20 +127,20 @@ class Game:
         )
 
     self.flash_cards[-1].show_answer = False
-    self.flash_cards[-1].correct_answer = False
-    self.flash_cards[-1].setup_choices()
+    self.flash_cards[-1].is_correct_answer = False
+    self.flash_cards[-1].setup_options()
     self.flash_cards.insert(index, self.flash_cards.pop())
 
   def change_screen_size(self):
     width = settings.WIDTH
     self.flash_cards[-1].options_wrap_width = width - 200
-    self.flash_cards[-1].setup_choices()
+    self.flash_cards[-1].setup_options()
     self.flash_cards[-1].question.wrap_width = width - 200
 
     if self.flash_cards[-1].choices_wrap[-1].y > settings.HEIGHT:
       width = 1800
       self.flash_cards[-1].options_wrap_width = width - 200
-      self.flash_cards[-1].setup_choices()
+      self.flash_cards[-1].setup_options()
       self.flash_cards[-1].question.wrap_width = width - 200
 
     self.screen = pygame.display.set_mode((width, settings.HEIGHT))
