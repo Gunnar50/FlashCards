@@ -12,7 +12,7 @@ YELLOW = (255, 255, 0)
 WIDTH = 1300
 HEIGHT = 800
 FPS = 60
-title = "FlashCards"
+TITLE = 'FlashCards'
 BGCOLOUR = DARKGREY
 
 TILESIZE = 80
@@ -20,5 +20,3 @@ GAPSIZE = 10
 
 MARGIN_X = int((WIDTH - (5 * (TILESIZE + GAPSIZE))) / 2)
 MARGIN_Y = int((HEIGHT - (6 * (TILESIZE + GAPSIZE))) / 2)
-
-
