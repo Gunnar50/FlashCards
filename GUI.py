@@ -1,16 +1,22 @@
+from collections.abc import Callable
+
 import pygame
 
+type Colour = tuple[int, int, int]
 
-def wrap_text(text, font, width, colour):
+
+def wrap_text(
+  text: str,
+  font: pygame.font.Font,
+  width: int,
+  colour: Colour,
+) -> pygame.Surface:
   """Wrap text to fit inside a given width when rendered.
   :param text: The text to be wrapped.
   :param font: The font the text will be rendered in.
   :param width: The width to wrap to.
   """
   text_lines = text.replace('\t', '    ').split('\n')
-  if width is None or width == 0:
-    return text_lines
-
   wrapped_lines = []
   for line in text_lines:
     line = line.rstrip() + ' '
@@ -23,9 +29,9 @@ def wrap_text(text, font, width, colour):
     start = line.index(' ', start)
     while start + 1 < len(line):
       # Get the next potential splitting point
-      next = line.index(' ', start + 1)
-      if font.size(line[:next])[0] <= width:
-        start = next
+      next_point = line.index(' ', start + 1)
+      if font.size(line[:next_point])[0] <= width:
+        start = next_point
       else:
         wrapped_lines.append(line[:start])
         line = line[start + 1 :]
@@ -37,7 +43,11 @@ def wrap_text(text, font, width, colour):
   return render_text_list(wrapped_lines, font, colour)
 
 
-def render_text_list(lines, font, colour=(255, 255, 255)):
+def render_text_list(
+  lines: list[str],
+  font: pygame.font.Font,
+  colour: Colour = (255, 255, 255),
+) -> pygame.Surface:
   """Draw multiline text to a single surface with a transparent background.
   Draw multiple lines of text in the given font onto a single surface
   with no background colour, and return the result.
@@ -62,8 +72,14 @@ def render_text_list(lines, font, colour=(255, 255, 255)):
 
 class Text:
   def __init__(
-    self, text, x, y, font='Consolas', font_size=22, font_colour=(0, 0, 0)
-  ):
+    self,
+    text: str,
+    x: float,
+    y: float,
+    font: str = 'Consolas',
+    font_size: int = 22,
+    font_colour: Colour = (0, 0, 0),
+  ) -> None:
     """
     Output text in the screen.
 
@@ -82,26 +98,26 @@ class Text:
     self.font_colour = font_colour
     self.draw_font()
 
-  def draw_font(self):
+  def draw_font(self) -> None:
     self.font_render = pygame.font.SysFont(self.font, self.font_size)
     self.render_text = self.font_render.render(
       self.text, True, self.font_colour
     )
 
-  def draw(self, screen):
+  def draw(self, screen: pygame.Surface) -> None:
     screen.blit(self.render_text, (self.x, self.y))
 
 
 class TextWrap:
   def __init__(
     self,
-    text,
-    x,
-    y,
-    font='Consolas',
-    font_size=22,
-    font_colour=(255, 255, 255),
-    wrap_width=800,
+    text: str,
+    x: float,
+    y: float,
+    font: str = 'Consolas',
+    font_size: int = 22,
+    font_colour: Colour = (255, 255, 255),
+    wrap_width: int = 800,
   ):
     """
     Output text in the screen.
@@ -125,29 +141,29 @@ class TextWrap:
       self.text, self.font_render, self.wrap_width, self.font_colour
     )
 
-  def draw_font(self):
+  def draw_font(self) -> None:
     self.font_render = pygame.font.SysFont(self.font, self.font_size)
     self.render_text = self.font_render.render(
       self.text, True, self.font_colour
     )
 
-  def draw(self, screen):
+  def draw(self, screen: pygame.Surface) -> None:
     screen.blit(self.wrap_text, (self.x, self.y))
 
 
 class TextField:
   def __init__(
     self,
-    screen,
-    x,
-    y,
-    box_size=20,
-    font='Consolas',
-    font_size=20,
-    font_colour=(255, 255, 255),
-    box_height=12,
-    placeholder='',
-    required=False,
+    screen: pygame.Surface,
+    x: float,
+    y: float,
+    box_size: int = 20,
+    font: str = 'Consolas',
+    font_size: int = 20,
+    font_colour: Colour = (255, 255, 255),
+    box_height: int = 12,
+    placeholder: str = '',
+    required: bool = False,
   ):
     """
     Text Field - to get input from the user
@@ -185,10 +201,10 @@ class TextField:
     self.empty = False
     self.draw_font()
 
-  def draw_font(self):
+  def draw_font(self) -> None:
     self.sys_font = pygame.font.SysFont(self.font, self.font_size)
 
-  def draw(self):
+  def draw(self) -> None:
     if self.active:
       self.colour = (255, 255, 255)
     elif self.empty:
@@ -249,7 +265,7 @@ class TextField:
           self.timer = 0
       self.timer += 1
 
-  def is_clicked(self, event):
+  def is_clicked(self, event: pygame.event.Event) -> None:
     pygame.key.set_repeat(500, 80)
     if event.type == pygame.MOUSEBUTTONDOWN:
       if self.input_rect.collidepoint(event.pos):
@@ -264,28 +280,27 @@ class TextField:
           if len(self.text) < self.box_size:
             self.text += event.unicode
 
-  def get(self):
+  def get(self) -> str:
     if self.required and self.text == '':
       self.empty = True
-    else:
-      return self.text
+    return self.text
 
 
 class Button:
   def __init__(
     self,
-    screen,
-    x,
-    y,
-    width,
-    height,
-    text,
-    command=None,
-    button_colour=(50, 50, 50),
-    button_outline_colour=None,
-    font='Consolas',
-    font_size=22,
-    font_colour=(255, 255, 255),
+    screen: pygame.Surface,
+    x: float,
+    y: float,
+    width: int,
+    height: int,
+    text: str,
+    command: Callable | None = None,
+    button_colour: Colour = (50, 50, 50),
+    button_outline_colour: Colour | None = None,
+    font: str = 'Consolas',
+    font_size: int = 22,
+    font_colour: Colour = (255, 255, 255),
   ):
     self.screen = screen
     self.x, self.y = x, y
@@ -301,13 +316,13 @@ class Button:
     self.command = command
     self.draw_font()
 
-  def draw_font(self):
+  def draw_font(self) -> None:
     font = pygame.font.SysFont(self.font, self.font_size)
     self.render_text = font.render(self.text, True, self.font_colour)
     self.draw_x = self.x + (self.width / 2 - self.render_text.get_width() / 2)
     self.draw_y = self.y + (self.height / 2 - self.render_text.get_height() / 2)
 
-  def draw(self):
+  def draw(self) -> None:
     if self.button_outline_colour is not None:
       pygame.draw.rect(
         self.screen,
@@ -324,7 +339,7 @@ class Button:
 
     self.screen.blit(self.render_text, (self.draw_x, self.draw_y))
 
-  def is_clicked(self, event):
+  def is_clicked(self, event: pygame.event.Event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       if (
@@ -334,36 +349,37 @@ class Button:
         if self.command is not None:
           self.command()
 
-  def hover(self, event):
+  def hover(self, event: pygame.event.Event) -> bool:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEMOTION:
       return (
         self.x <= mx <= self.x + self.width
         and self.y <= my <= self.y + self.height
       )
+    return False
 
 
 class Tab:
   def __init__(
     self,
-    screen,
-    x,
-    y,
-    width,
-    height,
-    options,
-    selected_colour=(50, 10, 200),
-    button_colour=(100, 100, 100),
-    bgcolour=(255, 255, 255),
-    outline_colour=(0, 0, 0),
-    font_size=24,
-    font_colour=(0, 0, 0),
+    screen: pygame.Surface,
+    x: float,
+    y: float,
+    width: int,
+    height: int,
+    options: list[str],
+    selected_colour: Colour = (50, 10, 200),
+    button_colour: Colour = (100, 100, 100),
+    bgcolour: Colour = (255, 255, 255),
+    outline_colour: Colour = (0, 0, 0),
+    font_size: int = 24,
+    font_colour: Colour = (0, 0, 0),
     font='Consolas',
   ):
     self.screen = screen
     self.options = options
     self.x, self.y = x, y
-    self.width, self.height = width / len(options), height
+    self.width, self.height = int(width / len(options)), height
     self.button_colour, self.bgcolour, self.outline_colour = (
       button_colour,
       bgcolour,
@@ -371,10 +387,10 @@ class Tab:
     )
     self.selected_colour = selected_colour
     self.font, self.font_size, self.font_colour = font, font_size, font_colour
-    self.tabs_list = []
+    self.tabs_list: list[Button] = []
     self.draw_text()
 
-  def draw_text(self):
+  def draw_text(self) -> None:
     for i, text in enumerate(self.options):
       tab = Button(
         self.screen,
@@ -392,11 +408,11 @@ class Tab:
       self.tabs_list.append(tab)
     self.tabs_list[0].button_colour = self.selected_colour
 
-  def draw(self):
+  def draw(self) -> None:
     for tab in self.tabs_list:
       tab.draw()
 
-  def is_clicked(self, event):
+  def is_clicked(self, event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       for tab in self.tabs_list:
@@ -408,28 +424,29 @@ class Tab:
             if t != tab:
               t.button_colour = self.button_colour
 
-  def get(self):
+  def get(self) -> str | None:
     for tab in self.tabs_list:
       if tab.button_colour == self.selected_colour:
         return tab.text
+    return None
 
 
 class ToggleButton:
   def __init__(
     self,
-    screen,
-    x,
-    y,
-    width,
-    height,
-    text_left,
-    text_right,
-    round_border=10,
-    text='',
-    button_colour=(0, 0, 0),
-    bgcolour=(255, 255, 255),
-    outline_colour=(0, 0, 0),
-    toggle=True,
+    screen: pygame.Surface,
+    x: float,
+    y: float,
+    width: int,
+    height: int,
+    text_left: str,
+    text_right: str,
+    round_border: int = 10,
+    text: str = '',
+    button_colour: Colour = (0, 0, 0),
+    bgcolour: Colour = (255, 255, 255),
+    outline_colour: Colour = (0, 0, 0),
+    toggle: bool = True,
   ):
     self.screen = screen
     self.colour, self.outline = button_colour, outline_colour
@@ -441,7 +458,7 @@ class ToggleButton:
     self.toggle = toggle
     self.round_border = round_border
 
-  def draw(self):
+  def draw(self) -> None:
     pygame.draw.rect(
       self.screen,
       self.outline,
@@ -491,7 +508,7 @@ class ToggleButton:
     self.screen.blit(text_left, (draw_x_left, draw_y_left))
     self.screen.blit(text_right, (draw_x_right, draw_y_right))
 
-  def is_clicked(self, event):
+  def is_clicked(self, event: pygame.event.Event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       if (
@@ -500,28 +517,28 @@ class ToggleButton:
       ):
         self.toggle = not self.toggle
 
-  def get(self):
+  def get(self) -> bool:
     return self.toggle
 
 
 class CheckBox:
   def __init__(
     self,
-    screen,
-    x,
-    y,
-    text='',
-    text_wrap_object=None,
-    size=30,
-    checked=False,
-    right_text=False,
-    box_colour=(255, 255, 255),
-    selected_colour=None,
-    box_outline=(0, 0, 0),
-    check_colour=(0, 0, 0),
-    font='Consolas',
-    font_size=20,
-    font_colour=(0, 0, 0),
+    screen: pygame.Surface,
+    x: float,
+    y: float,
+    text: str = '',
+    text_wrap_object: TextWrap | None = None,
+    size: int = 30,
+    checked: bool = False,
+    right_text: bool = False,
+    box_colour: Colour = (255, 255, 255),
+    selected_colour: Colour | None = None,
+    box_outline: Colour = (0, 0, 0),
+    check_colour: Colour = (0, 0, 0),
+    font: str = 'Consolas',
+    font_size: int = 20,
+    font_colour: Colour = (0, 0, 0),
   ):
     self.screen = screen
     self.x, self.y = x, y
@@ -541,7 +558,7 @@ class CheckBox:
     self.radio = False
     self.draw_font()
 
-  def draw_font(self):
+  def draw_font(self) -> None:
     font = pygame.font.SysFont(self.font, self.font_size)
     self.render_text = font.render(self.text, True, self.font_colour)
     self.draw_y = (
@@ -552,7 +569,7 @@ class CheckBox:
     else:
       self.draw_x = self.x - (self.render_text.get_width()) - self.spacing
 
-  def draw(self):
+  def draw(self) -> None:
     if not self.radio:
       # checkbox
       pygame.draw.rect(
@@ -629,7 +646,7 @@ class CheckBox:
     else:
       self.screen.blit(self.render_text, (self.draw_x, self.draw_y))
 
-  def is_clicked_2(self, event):
+  def is_clicked_2(self, event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       if (
@@ -638,7 +655,7 @@ class CheckBox:
       ):
         self.checked = not self.checked
 
-  def is_clicked(self, event):
+  def is_clicked(self, event: pygame.event.Event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       if self.text_wrap_obj is not None:
@@ -669,28 +686,28 @@ class CheckBox:
         ):
           self.checked = not self.checked
 
-  def get(self):
+  def get(self) -> bool:
     return self.checked
 
 
 class RadioButton:
   def __init__(
     self,
-    screen,
-    options,
-    x,
-    y,
-    size=20,
-    gap=50,
-    right_text=True,
-    wrap_text=True,
-    box_colour=(255, 255, 255),
-    selected_colour=None,
-    box_outline=(0, 0, 0),
-    check_colour=(0, 0, 0),
-    font='Consolas',
-    font_size=20,
-    font_colour=(0, 0, 0),
+    screen: pygame.Surface,
+    options: list[TextWrap],
+    x: float,
+    y: float,
+    size: int = 20,
+    gap: int = 50,
+    right_text: bool = True,
+    wrap_text: bool = True,
+    box_colour: Colour = (255, 255, 255),
+    selected_colour: Colour | None = None,
+    box_outline: Colour = (0, 0, 0),
+    check_colour: Colour = (0, 0, 0),
+    font: str = 'Consolas',
+    font_size: int = 20,
+    font_colour: Colour = (0, 0, 0),
   ):
     # options is a list with the options as strings
     self.screen = screen
@@ -707,10 +724,10 @@ class RadioButton:
     self.font = font
     self.font_size = font_size
     self.font_colour = font_colour
-    self.radio_button_list = []
+    self.radio_button_list: list[CheckBox] = []
     self.create_options()
 
-  def create_options(self):
+  def create_options(self) -> None:
     for i, option in enumerate(self.options):
       radio = CheckBox(
         self.screen,
@@ -732,11 +749,11 @@ class RadioButton:
       self.radio_button_list.append(radio)
     self.radio_button_list[0].checked = True
 
-  def draw(self):
+  def draw(self) -> None:
     for box in self.radio_button_list:
       box.draw()
 
-  def is_clicked_2(self, event):
+  def is_clicked_2(self, event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       for button in self.radio_button_list:
@@ -749,7 +766,7 @@ class RadioButton:
             if box != button:
               box.checked = False
 
-  def is_clicked(self, event):
+  def is_clicked(self, event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       for button in self.radio_button_list:
@@ -791,27 +808,28 @@ class RadioButton:
               if box != button:
                 box.checked = False
 
-  def get(self):
+  def get(self) -> str | None:
     for button in self.radio_button_list:
       if button.checked:
         return button.text
+    return None
 
 
 class DropDown:
   def __init__(
     self,
-    screen,
-    x,
-    y,
-    options=None,
-    box_colour=(255, 255, 255),
-    hover_colour=(150, 150, 150),
-    box_outline_colour=(0, 0, 0),
-    box_outline_width=3,
-    font='Consolas',
-    font_size=20,
-    font_colour=(0, 0, 0),
-    default_text='Select an Option',
+    screen: pygame.Surface,
+    x: float,
+    y: float,
+    options: list[str] | None = None,
+    box_colour: Colour = (255, 255, 255),
+    hover_colour: Colour = (150, 150, 150),
+    box_outline_colour: Colour = (0, 0, 0),
+    box_outline_width: int = 3,
+    font: str = 'Consolas',
+    font_size: int = 20,
+    font_colour: Colour = (0, 0, 0),
+    default_text: str = 'Select an Option',
   ):
     self.screen = screen
     self.x, self.y = x, y
@@ -827,7 +845,7 @@ class DropDown:
     self.create_options()
     self.get_value = ''
 
-  def draw_font(self):
+  def draw_font(self) -> None:
     self.sys_font = pygame.font.SysFont(self.font, self.font_size)
     self.render_text = self.sys_font.render(
       self.default_text, True, self.font_colour
@@ -841,7 +859,7 @@ class DropDown:
       self.box_height / 2 - self.render_text.get_height() / 2
     )
 
-  def create_options(self):
+  def create_options(self) -> None:
     self.options_rect = []
     self.render_options = []
     for i, option in enumerate(self.options):
@@ -860,7 +878,7 @@ class DropDown:
         self.sys_font.render(option, True, self.font_colour)
       )
 
-  def draw(self):
+  def draw(self) -> None:
     # box
     if self.opened:
       if len(self.options) > 0:
@@ -903,7 +921,7 @@ class DropDown:
     else:
       self.screen.blit(self.render, (self.draw_x, self.draw_y))
 
-  def is_clicked(self, event):
+  def is_clicked(self, event) -> None:
     mx, my = pygame.mouse.get_pos()
     if event.type == pygame.MOUSEBUTTONDOWN:
       if self.opened:
@@ -937,12 +955,12 @@ class DropDown:
         else:
           rect[0] = self.box_colour
 
-  def get(self):
+  def get(self) -> str:
     return self.get_value
 
 
 class Drag:
-  def __init__(self, x, y, width, text):
+  def __init__(self, x: float, y: float, width: int, text: str):
     self.x, self.y = x, y
     self.width, self.height = width
     self.text = text
@@ -956,14 +974,14 @@ class Drop(Drag):
 class DragDrop:
   def __init__(
     self,
-    width,
-    height,
-    x,
-    y,
+    width: int,
+    height: int,
+    x: float,
+    y: float,
     options,
-    font='Consolas',
-    font_size=20,
-    font_colour=(0, 0, 0),
+    font: str = 'Consolas',
+    font_size: int = 20,
+    font_colour: Colour = (0, 0, 0),
   ):
     self.x, self.y = x, y
     self.width, self.height = width, height
@@ -977,13 +995,13 @@ class DragDrop:
     self.drop_options = []
     self.create_options()
 
-  def create_options(self):
+  def create_options(self) -> None:
     for drag in self.options[0]:
       self.drag_options.append(
         Drag(self.x, self.y, (self.width / 2) - self.margin * 2)
       )
 
-  def draw_font(self):
+  def draw_font(self) -> None:
     font = pygame.font.SysFont(self.font_family, self.font_size)
     self.render_text = font.render(self.text, True, self.font_colour)
     self.draw_y = (
